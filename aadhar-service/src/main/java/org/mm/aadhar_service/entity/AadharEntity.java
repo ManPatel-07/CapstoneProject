@@ -30,6 +30,8 @@ public class AadharEntity
 	@Column(length = 50, unique = true)
 	private String aadharNo;
 	
+	private Long userId;
+	
     @Lob
     @Column
     private Byte[] aadharImage;

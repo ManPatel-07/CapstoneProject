@@ -15,7 +15,6 @@ public class AadharService
 
 	private final AadharRepository aadharRepository;
 	
-	
 	public AadharEntity createNewAadhar(AadharEntity aadharEntity)
 	{
 		return aadharRepository.save(aadharEntity);

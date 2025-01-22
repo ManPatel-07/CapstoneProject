@@ -6,22 +6,37 @@ spring:
   cloud:
     gateway:
        routes:
-         - id: book-service
-           uri: lb://BOOK-SERVICE
+         - id: aadhar-service
+           uri: lb://AADHAR-SERVICE
            predicates:
-             - Path=/api/v1/books/**
+             - Path=/api/v1/aadhar/**
+                            
+           filters:
+             - StripPrefix=2
+             
+         - id: user-service
+           uri: lb://USER-SERVICE
+           predicates:
+             - Path=/api/v1/users/**
                             
            filters:
              - StripPrefix=2
 
-         - id: borrower-service
-           uri: lb://BORROWER-SERVICE
+         - id: education-service
+           uri: lb://EDUCATION-SERVICE
            predicates:
-             - Path=/api/v1/borrower/**
+             - Path=/api/v1/education/**
+                            
+           filters:
+             - StripPrefix=2
+             
+         - id: pan-service
+           uri: lb://PAN-SERVICE
+           predicates:
+             - Path=/api/v1/pan/**
 
            filters:
              - StripPrefix=2
-             - AddRequestHeader=X-Pqr-Header, Man
 
 eureka:
    client:

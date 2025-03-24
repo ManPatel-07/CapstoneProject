@@ -1,0 +1,75 @@
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Profile Image Section -->
+      <div class="profile-section">
+        <img src="https://marketplace.canva.com/EAFXS8-cvyQ/1/0/1600w/canva-brown-and-light-brown%2C-circle-framed-instagram-profile-picture-2PE9qJLmPac.jpg" alt="Profile Image">
+        <h3>John Doe</h3>
+      </div>
+  
+      <!-- Sidebar Buttons -->
+      <button (click)="showSection('profile')">Profile</button>
+      <button (click)="showSection('aadhar')">Aadhar</button>
+      <button (click)="showSection('pan')">Pan</button>
+      <button (click)="showSection('academic')">Academic</button>
+    </div>
+  
+    <!-- Content Area -->
+    <div class="content">
+      <!-- Profile Section -->
+      <div *ngIf="activeSection === 'profile'" class="section">
+        <h2>Profile Details</h2>
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Email:</strong> john.doe xample.com</p>
+        <p><strong>Address:</strong> 123, Street, City</p>
+        <p><strong>Phone:</strong> +91 9876543210</p>
+      </div>
+  
+      <!-- Aadhar Section -->
+      <div *ngIf="activeSection === 'aadhar'" class="section">
+        <h2>Aadhar Details</h2>
+        <div class="input-group">
+          <input type="text" placeholder="Aadhar Name">
+        </div>
+        <div class="input-group">
+          <input type="text" placeholder="Aadhar Number">
+        </div>
+        <div class="input-group file-upload">
+          <input type="file">
+        </div>
+        <button>Save</button>
+      </div>
+  
+      <!-- Pan Section -->
+      <div *ngIf="activeSection === 'pan'" class="section">
+        <h2>Pan Details</h2>
+        <div class="input-group">
+          <input type="text" placeholder="Pan Name">
+        </div>
+        <div class="input-group">
+          <input type="text" placeholder="Pan Number">
+        </div>
+        <div class="input-group file-upload">
+          <input type="file">
+        </div>
+        <button>Save</button>
+      </div>
+  
+      <!-- Academic Section -->
+      <div *ngIf="activeSection === 'academic'" class="section">
+        <h2>Academic Details</h2>
+        <div class="input-group">
+          <input type="text" placeholder="Degree">
+        </div>
+        <div class="input-group">
+          <input type="text" placeholder="Institute Name">
+        </div>
+        <div class="input-group file-upload">
+          <input type="file">
+        </div>
+        <button>Save</button>
+      </div>
+    </div>
+  </div>
+  

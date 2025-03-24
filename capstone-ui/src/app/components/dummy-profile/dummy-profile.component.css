@@ -1,0 +1,105 @@
+/* Container Layout */
+.container {
+    display: flex;
+    height: 100vh;
+    background-color: #f5f6fa;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 280px;
+    background-color: #2c3e50;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Profile Image */
+  .profile-section {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-section img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+  }
+  
+  .profile-section h3 {
+    color: white;
+    margin-top: 10px;
+  }
+  
+  /* Sidebar Buttons */
+  .sidebar button {
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+  }
+  
+  .sidebar button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Content Area */
+  .content {
+    flex: 1;
+    padding: 30px;
+  }
+  
+  /* Sections */
+  .section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  /* Input Fields */
+  .input-group {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .file-upload input {
+    background-color: #ecf0f1;
+  }
+  
+  /* Save Button */
+  button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background-color: #219150;
+  }
+  

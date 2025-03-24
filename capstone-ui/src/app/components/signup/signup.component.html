@@ -1,0 +1,42 @@
+<div class="signup-container">
+  <div class="signup-box">
+    <h2>Create an Account 😊</h2>
+    <p>Join us today!</p>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <input type="text" placeholder="Full Name" formControlName="name" required />
+      </div>
+
+      <div class="input-group">
+        <input type="email" placeholder="Enter your email" formControlName="email" required />
+      </div>
+
+      <div class="input-group">
+        <input type="text" placeholder="Contact Number" formControlName="contactNo" required />
+      </div>
+
+      <div class="input-group">
+        <input type="file" (change)="onFileChange($event)" accept="image/*" required />
+      </div>
+
+      <div class="input-group">
+        <input type="password" placeholder="Create Password" formControlName="password" required />
+      </div>
+
+      <div class="input-group">
+        <input type="text" placeholder="Address" formControlName="address" required />
+      </div>
+
+      <div class="input-group">
+        <input type="text" placeholder="Postal Code" formControlName="postalCode" required />
+      </div>
+
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </form>
+
+    <p class="login-text">
+      Already have an account? <a href="/login">Login</a>
+    </p>
+  </div>
+</div>

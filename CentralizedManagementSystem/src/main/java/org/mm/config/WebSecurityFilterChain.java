@@ -33,7 +33,7 @@ public class WebSecurityFilterChain
 	{
 		httpSecurity
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/secondUser/test", "/auth/**", "/api/v1/**").permitAll()
+						.requestMatchers("/secondUser/test", "/auth/**", "/testImage/**").permitAll()
 						.requestMatchers(HttpMethod.POST ,"/secondUser/testadmin").hasAnyRole(Role.ADMIN.name())
 						.requestMatchers(HttpMethod.GET ,"/secondUser/testUser").hasAnyRole(Role.USER.name())
 						.anyRequest().authenticated())

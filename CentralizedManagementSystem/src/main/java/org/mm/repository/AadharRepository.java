@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AadharRepository extends JpaRepository<AadharEntity, Long>
 {
+	AadharEntity findByProfileId(Long profileId);
 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -32,20 +33,20 @@ public class AadharController
 	
 	@PostMapping(value = "/addAadharData2", consumes = "multipart/form-data")
 	public ResponseEntity<?> addOrUpdatepackageMaterial2(@RequestParam("data") String json,
-			@RequestParam(value = "aadharImage", required = false) MultipartFile adminImage) {
+			@RequestParam(value = "aadharImage", required = false) MultipartFile adminImage,
+			HttpServletRequest request) {
 		
-		return aadharService.addAadharDetails2(json, adminImage);
+		return aadharService.addAadharDetails2(json, adminImage, request);
 		
 	}
 	
-	
-	@PostMapping(value = "/addAadharData", consumes = "multipart/form-data")
-	public ResponseEntity<?> addOrUpdatepackageMaterial(@RequestParam("data") String json,
-			@RequestParam(value = "aadharImage", required = false) MultipartFile adminImage) {
-		
-		return aadharService.addAadharDetails(json, adminImage);
-		
-	}
+//	@PostMapping(value = "/addAadharData", consumes = "multipart/form-data")
+//	public ResponseEntity<?> addOrUpdatepackageMaterial(@RequestParam("data") String json,
+//			@RequestParam(value = "aadharImage", required = false) MultipartFile adminImage) {
+//		
+//		return aadharService.addAadharDetails(json, adminImage);
+//		
+//	}
 	
 	@GetMapping(value = "/getAadharData")
 	public ResponseEntity<?> getAdminData()
@@ -55,7 +56,7 @@ public class AadharController
 	}
 	
     @GetMapping("/image/{fileName}")
-    public ResponseEntity<?> getImage(@PathVariable String fileName) {
+    public ResponseEntity<?> getImage(@PathVariable("fileName") String fileName) {
         try {
             File imageFile = fileUtils.getFile(fileName, "aadharImage");
 
@@ -75,6 +76,20 @@ public class AadharController
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving image");
         }
+    }
+    
+    @GetMapping("/validate-token")
+    public ResponseEntity<?> validateToken(HttpServletRequest request) {
+        // Extract token from the Authorization header
+        String authHeader = request.getHeader("Authorization");
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(401).body("Missing or invalid Authorization header");
+        }
+
+        String token = authHeader.substring(7); // Remove "Bearer " prefix
+        
+        return aadharService.getAadharById(token);
     }
 	
 	

@@ -52,6 +52,8 @@ public class UserProfileDetailsEntity implements UserDetails
 	
 	private String postalCode;
 	
+	private String bio;
+	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
 	private Set<Role> roles;

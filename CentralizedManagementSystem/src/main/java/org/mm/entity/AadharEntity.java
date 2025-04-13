@@ -1,5 +1,9 @@
 package org.mm.entity;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +33,9 @@ public class AadharEntity
 	private String aadharImage;
 	
 	private Long profileId;
+	
+//	@JsonFormat(pattern = "yyyy-MM-dd")
+	private String dob;
 
 	public AadharEntity(String aadharName, String aadharNo, String aadharImage) {
 		super();

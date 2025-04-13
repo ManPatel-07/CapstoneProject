@@ -9,8 +9,10 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { DummyProfileComponent } from './components/dummy-profile/dummy-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TestUiComponent } from './componentes/test-ui/test-ui.component';
+import { JwtInterceptor } from './components/interceptors/jwt.interceptor';
+import { AuthInterceptor } from './components/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { TestUiComponent } from './componentes/test-ui/test-ui.component';
     HttpClientModule
   ],
   providers: [
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]

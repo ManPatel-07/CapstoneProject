@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AadharData, AadharService } from '../../services/aadhar.service';
 
 declare var bootstrap: any; // Declare Bootstrap globally if needed
 
@@ -8,30 +9,30 @@ declare var bootstrap: any; // Declare Bootstrap globally if needed
   styleUrl: './test-ui.component.css'
 })
 export class TestUiComponent {
+  aadharData = {
+    aadharName: '',
+    aadharNo: '',
+  };
+  selectedFile!: File;
 
-  @ViewChild('sideNav', { static: false }) sideNav!: ElementRef;
-  @ViewChild('navbarToggler', { static: false }) navbarToggler!: ElementRef;
+  constructor(private aadharService: AadharService) {}
 
-  constructor(private renderer: Renderer2) {}
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
 
-  ngAfterViewInit(): void {
-    // Activate Bootstrap scrollspy on the main nav element
-    if (this.sideNav) {
-      new bootstrap.ScrollSpy(document.body, {
-        target: '#sideNav',
-        rootMargin: '0px 0px -40%',
-      });
-    }
-
-    // Collapse responsive navbar when toggler is visible
-    const responsiveNavItems = document.querySelectorAll('#navbarResponsive .nav-link');
-
-    responsiveNavItems.forEach(navItem => {
-      this.renderer.listen(navItem, 'click', () => {
-        if (this.navbarToggler && window.getComputedStyle(this.navbarToggler.nativeElement).display !== 'none') {
-          this.navbarToggler.nativeElement.click();
+  submitForm() {
+    if (this.selectedFile && this.aadharData.aadharName && this.aadharData.aadharNo) {
+      this.aadharService.uploadAadhar(this.aadharData, this.selectedFile).subscribe(
+        (response) => {
+          alert('🎉 Aadhaar uploaded successfully!');
+        },
+        (error) => {
+          alert('❌ Error uploading Aadhaar!');
         }
-      });
-    });
+      );
+    } else {
+      alert('⚠️ Please fill in all fields and select an image.');
+    }
   }
 }

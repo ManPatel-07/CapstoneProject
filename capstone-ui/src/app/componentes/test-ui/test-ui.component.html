@@ -1,1 +1,18 @@
 <h1>Profile Page On Work ....</h1>
+<div class="container">
+  <div class="card">
+    <h2>📜 Upload Aadhaar Data</h2>
+    <form (ngSubmit)="submitForm()">
+      <label for="name">Aadhaar Name</label>
+      <input type="text" id="name" [(ngModel)]="aadharData.aadharName" name="aadharName" required />
+
+      <label for="number">Aadhaar Number</label>
+      <input type="text" id="number" [(ngModel)]="aadharData.aadharNo" name="aadharNo" required />
+
+      <label for="file">Upload Aadhaar Image</label>
+      <input type="file" id="file" (change)="onFileSelected($event)" required />
+
+      <button type="submit">🚀 Upload</button>
+    </form>
+  </div>
+</div>

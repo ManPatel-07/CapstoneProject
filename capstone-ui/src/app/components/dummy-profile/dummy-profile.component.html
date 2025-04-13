@@ -1,75 +1,266 @@
 
-<div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Profile Image Section -->
-      <div class="profile-section">
-        <img src="https://marketplace.canva.com/EAFXS8-cvyQ/1/0/1600w/canva-brown-and-light-brown%2C-circle-framed-instagram-profile-picture-2PE9qJLmPac.jpg" alt="Profile Image">
-        <h3>John Doe</h3>
-      </div>
-  
-      <!-- Sidebar Buttons -->
-      <button (click)="showSection('profile')">Profile</button>
-      <button (click)="showSection('aadhar')">Aadhar</button>
-      <button (click)="showSection('pan')">Pan</button>
-      <button (click)="showSection('academic')">Academic</button>
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">Clarence Taylor</span>
+        <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/image.png" alt="..." /></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Aadhar</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Pan Card</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Driving License</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Birth Certificate</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Passport</a></li>
+        </ul>
     </div>
-  
-    <!-- Content Area -->
-    <div class="content">
-      <!-- Profile Section -->
-      <div *ngIf="activeSection === 'profile'" class="section">
-        <h2>Profile Details</h2>
-        <p><strong>Name:</strong> John Doe</p>
-        <p><strong>Email:</strong> john.doe xample.com</p>
-        <p><strong>Address:</strong> 123, Street, City</p>
-        <p><strong>Phone:</strong> +91 9876543210</p>
-      </div>
-  
-      <!-- Aadhar Section -->
-      <div *ngIf="activeSection === 'aadhar'" class="section">
-        <h2>Aadhar Details</h2>
-        <div class="input-group">
-          <input type="text" placeholder="Aadhar Name">
+</nav>
+<!-- Page Content-->
+<div class="container-fluid p-0">
+    <!-- About-->
+    <section class="resume-section" id="about">
+        <div class="resume-section-content">
+            <h1 class="mb-0">
+                Kushal
+                <span class="text-primary">Rajan</span>
+            </h1>
+            <div class="subheading mb-5">
+                305, Sahajanand Avenue, Sargasan Pin :- 382006
+                <a href="mailto:name@email.com">sshh gmail.com</a>
+            </div>
+            <p class="lead mb-5">This is all Information about userx .</p>
+            <div class="social-icons">
+                <a class="social-icon" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                <a class="social-icon" href="#!"><i class="fab fa-github"></i></a>
+                <a class="social-icon" href="#!"><i class="fab fa-twitter"></i></a>
+                <a class="social-icon" href="#!"><i class="fab fa-facebook-f"></i></a>
+            </div>
         </div>
-        <div class="input-group">
-          <input type="text" placeholder="Aadhar Number">
+    </section>
+    <hr class="m-0" />
+    <!-- Experience-->
+    <section class="resume-section" id="experience">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Aadhar Details</h2>
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1" *ngIf="!isEditing">
+                    <h3 class="mb-0">Name :- {{ aadharDetails.name }}</h3>
+                    <h3 class="mb-0">Aadhar No :- {{ aadharDetails.aadharNo }}</h3>
+                    <img [src]="aadharDetails.image" alt="" class="aadhar-img">
+                </div>
+    
+                <div class="flex-grow-1" *ngIf="isEditing">
+                    <form (submit)="saveAadharDetails()">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" [(ngModel)]="aadharDetails.name" name="name">
+                        
+                        <label>Aadhar No:</label>
+                        <input type="text" class="form-control" [(ngModel)]="aadharDetails.aadharNo" name="aadharNo">
+                        
+                        <label>Upload Image:</label>
+                        <input type="file" class="form-control" (change)="onFileSelected($event)">
+                    </form>
+                </div>
+            </div>
+    
+            <div>
+                <button class="Aadhar-Btn" (click)="saveAadharDetails()" *ngIf="isEditing">Save</button>
+                <button class="Aadhar-Btn" (click)="toggleEdit()" *ngIf="!isEditing">Edit</button>
+            </div>
         </div>
-        <div class="input-group file-upload">
-          <input type="file">
+    </section>
+    
+    
+    <script>
+        document.getElementById('editBtn').addEventListener('click', function() {
+            document.getElementById('displaySection').classList.add('d-none');
+            document.getElementById('editSection').classList.remove('d-none');
+            document.getElementById('editBtn').classList.add('d-none');
+            document.getElementById('saveBtn').classList.remove('d-none');
+        });
+    
+        document.getElementById('saveBtn').addEventListener('click', function() {
+            document.getElementById('nameText').textContent = document.getElementById('nameInput').value;
+            document.getElementById('aadharText').textContent = document.getElementById('aadharInput').value;
+            
+            const fileInput = document.getElementById('imageInput');
+            if (fileInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('aadharImg').src = e.target.result;
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+    
+            document.getElementById('displaySection').classList.remove('d-none');
+            document.getElementById('editSection').classList.add('d-none');
+            document.getElementById('editBtn').classList.remove('d-none');
+            document.getElementById('saveBtn').classList.add('d-none');
+        });
+    </script>
+    
+    <hr class="m-0" />
+    <!-- Education-->
+    <section class="resume-section" id="education">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Education</h2>
+            
+            <!-- Display Section -->
+            <div id="displayEducation">
+                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-0" id="collegeNameText">University of Colorado Boulder</h3>
+                        <div class="subheading mb-3" id="degreeText">Bachelor of Science</div>
+                        <div id="courseText">Computer Science - Web Development Track</div>
+                        <p id="gpaText">GPA: 3.23</p>
+                    </div>
+                    <div class="flex-shrink-0"><span class="text-primary" id="collegeYearsText">August 2006 - May 2010</span></div>
+                </div>
+                <div class="d-flex flex-column flex-md-row justify-content-between">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-0" id="highSchoolNameText">James Buchanan High School</h3>
+                        <div class="subheading mb-3" id="highSchoolProgramText">Technology Magnet Program</div>
+                        <p id="highSchoolGpaText">GPA: 3.56</p>
+                    </div>
+                    <div class="flex-shrink-0"><span class="text-primary" id="highSchoolYearsText">August 2002 - May 2006</span></div>
+                </div>
+            </div>
+            
+            <!-- Editable Form -->
+            <div id="editEducation" class="d-none">
+                <form>
+                    <h4>College Details</h4>
+                    <div class="mb-3">
+                        <label class="form-label">College Name</label>
+                        <input type="text" class="form-control" id="collegeNameInput" value="University of Colorado Boulder">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Degree</label>
+                        <input type="text" class="form-control" id="degreeInput" value="Bachelor of Science">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Course</label>
+                        <input type="text" class="form-control" id="courseInput" value="Computer Science - Web Development Track">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">GPA</label>
+                        <input type="text" class="form-control" id="gpaInput" value="3.23">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Start Year</label>
+                        <input type="text" class="form-control" id="collegeStartInput" value="August 2006">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">End Year</label>
+                        <input type="text" class="form-control" id="collegeEndInput" value="May 2010">
+                    </div>
+                    
+                    <h4>High School Details</h4>
+                    <div class="mb-3">
+                        <label class="form-label">High School Name</label>
+                        <input type="text" class="form-control" id="highSchoolNameInput" value="James Buchanan High School">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Program</label>
+                        <input type="text" class="form-control" id="highSchoolProgramInput" value="Technology Magnet Program">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">GPA</label>
+                        <input type="text" class="form-control" id="highSchoolGpaInput" value="3.56">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Start Year</label>
+                        <input type="text" class="form-control" id="highSchoolStartInput" value="August 2002">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">End Year</label>
+                        <input type="text" class="form-control" id="highSchoolEndInput" value="May 2006">
+                    </div>
+                </form>
+            </div>
+            
+            <div>
+                <button class="Aadhar-Btn d-none" id="saveEducationBtn">Save</button>
+                <button class="Aadhar-Btn" id="editEducationBtn">Edit</button>
+            </div>
         </div>
-        <button>Save</button>
-      </div>
-  
-      <!-- Pan Section -->
-      <div *ngIf="activeSection === 'pan'" class="section">
-        <h2>Pan Details</h2>
-        <div class="input-group">
-          <input type="text" placeholder="Pan Name">
+    </section>
+    
+    <script>
+        document.getElementById('editEducationBtn').addEventListener('click', function() {
+            document.getElementById('displayEducation').classList.add('d-none');
+            document.getElementById('editEducation').classList.remove('d-none');
+            document.getElementById('editEducationBtn').classList.add('d-none');
+            document.getElementById('saveEducationBtn').classList.remove('d-none');
+        });
+    
+        document.getElementById('saveEducationBtn').addEventListener('click', function() {
+            document.getElementById('collegeNameText').textContent = document.getElementById('collegeNameInput').value;
+            document.getElementById('degreeText').textContent = document.getElementById('degreeInput').value;
+            document.getElementById('courseText').textContent = document.getElementById('courseInput').value;
+            document.getElementById('gpaText').textContent = "GPA: " + document.getElementById('gpaInput').value;
+            document.getElementById('collegeYearsText').textContent = document.getElementById('collegeStartInput').value + " - " + document.getElementById('collegeEndInput').value;
+            
+            document.getElementById('highSchoolNameText').textContent = document.getElementById('highSchoolNameInput').value;
+            document.getElementById('highSchoolProgramText').textContent = document.getElementById('highSchoolProgramInput').value;
+            document.getElementById('highSchoolGpaText').textContent = "GPA: " + document.getElementById('highSchoolGpaInput').value;
+            document.getElementById('highSchoolYearsText').textContent = document.getElementById('highSchoolStartInput').value + " - " + document.getElementById('highSchoolEndInput').value;
+    
+            document.getElementById('displayEducation').classList.remove('d-none');
+            document.getElementById('editEducation').classList.add('d-none');
+            document.getElementById('editEducationBtn').classList.remove('d-none');
+            document.getElementById('saveEducationBtn').classList.add('d-none');
+        });
+    </script>
+    
+    <hr class="m-0" />
+    <!-- Skills-->
+    <section class="resume-section" id="skills">
+        <div class="resume-section-content">
+            <h3 class="mb-0">Name :- Kushal Rajan</h3>
+            <h3 class="mb-0">Pan No :- 88998999898</h3>
+            <h2>Image file</h2>
+            <!-- <div class="subheading mb-3">Programming Languages & Tools</div>
+            <ul class="list-inline dev-icons">
+                <li class="list-inline-item"><i class="fab fa-html5"></i></li>
+                <li class="list-inline-item"><i class="fab fa-css3-alt"></i></li>
+                <li class="list-inline-item"><i class="fab fa-js-square"></i></li>
+                <li class="list-inline-item"><i class="fab fa-angular"></i></li>
+                <li class="list-inline-item"><i class="fab fa-react"></i></li>
+                <li class="list-inline-item"><i class="fab fa-node-js"></i></li>
+                <li class="list-inline-item"><i class="fab fa-sass"></i></li>
+                <li class="list-inline-item"><i class="fab fa-less"></i></li>
+                <li class="list-inline-item"><i class="fab fa-wordpress"></i></li>
+                <li class="list-inline-item"><i class="fab fa-gulp"></i></li>
+                <li class="list-inline-item"><i class="fab fa-grunt"></i></li>
+                <li class="list-inline-item"><i class="fab fa-npm"></i></li>
+            </ul>
+            <div class="subheading mb-3">Workflow</div>
+            <ul class="fa-ul mb-0">
+                <li>
+                    <span class="fa-li"><i class="fas fa-check"></i></span>
+                    Mobile-First, Responsive Design
+                </li>
+                <li>
+                    <span class="fa-li"><i class="fas fa-check"></i></span>
+                    Cross Browser Testing & Debugging
+                </li>
+                <li>
+                    <span class="fa-li"><i class="fas fa-check"></i></span>
+                    Cross Functional Teams
+                </li>
+                <li>
+                    <span class="fa-li"><i class="fas fa-check"></i></span>
+                    Agile Development & Scrum
+                </li>
+            </ul> -->
         </div>
-        <div class="input-group">
-          <input type="text" placeholder="Pan Number">
-        </div>
-        <div class="input-group file-upload">
-          <input type="file">
-        </div>
-        <button>Save</button>
-      </div>
-  
-      <!-- Academic Section -->
-      <div *ngIf="activeSection === 'academic'" class="section">
-        <h2>Academic Details</h2>
-        <div class="input-group">
-          <input type="text" placeholder="Degree">
-        </div>
-        <div class="input-group">
-          <input type="text" placeholder="Institute Name">
-        </div>
-        <div class="input-group file-upload">
-          <input type="file">
-        </div>
-        <button>Save</button>
-      </div>
-    </div>
-  </div>
-  
+    </section>
+    <hr class="m-0" />
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>

@@ -19,6 +19,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -32,6 +37,8 @@ public class WebSecurityFilterChain
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception
 	{
 		httpSecurity
+		        .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ Enable CORS
+		        .csrf(custom -> custom.disable())
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/secondUser/test", "/auth/**", "/testImage/**").permitAll()
 						.requestMatchers(HttpMethod.POST ,"/secondUser/testadmin").hasAnyRole(Role.ADMIN.name())
@@ -68,5 +75,18 @@ public class WebSecurityFilterChain
 	{
 		return config.getAuthenticationManager();
 	}
+	
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:4200")); // ✅ Allow Angular
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
 }

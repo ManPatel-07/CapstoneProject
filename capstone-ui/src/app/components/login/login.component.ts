@@ -19,10 +19,14 @@ export class LoginComponent {
     }
 
     this.authService.login(this.loginData).subscribe(
-      (response) => {
+      (response: any) => {
         console.log('Login successful:', response);
-        localStorage.setItem('token', response.token); // Store token
-        this.router.navigate(['/profile']); // Navigate to profile page
+        
+        // Store JWT token securely
+        localStorage.setItem('token', response.accessToken);
+        
+        // Navigate to profile page after successful login
+        this.router.navigate(['/profile']);
       },
       (error) => {
         console.error('Login failed:', error);

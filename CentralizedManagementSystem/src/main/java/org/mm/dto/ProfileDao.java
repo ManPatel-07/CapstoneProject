@@ -29,4 +29,6 @@ public class ProfileDao
 	private String address;
 	
 	private String postalCode;
+	
+	private String bio;
 }

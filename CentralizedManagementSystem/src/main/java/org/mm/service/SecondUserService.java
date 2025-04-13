@@ -120,6 +120,7 @@ public class SecondUserService implements UserDetailsService
 			}
 		}
 		
+		userEntity.setBio(dao.getBio());
 		userEntity.setAddress(dao.getAddress());
 		userEntity.setPostalCode(dao.getPostalCode());
 		userEntity.setContactNo(dao.getPostalCode());

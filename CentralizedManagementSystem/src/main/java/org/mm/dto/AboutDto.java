@@ -1,7 +1,5 @@
 package org.mm.dto;
 
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -9,19 +7,19 @@ import lombok.Data;
 
 @JsonInclude(value = Include.NON_NULL)
 @Data
-public class AadharDao 
+public class AboutDto 
 {
-	private Long id;
+	private String email;
 	
-	private String aadharName;
+	private String name;
 	
-	private String aadharNo;
+	private String profileImage;
 	
-	private String aadharImage;
+	private String contactNo;
 	
-	private Long profileId;
+	private String address;
 	
-	private String dob;
-
-
+	private String postalCode;
+	
+	private String bio;
 }
